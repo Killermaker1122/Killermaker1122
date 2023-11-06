@@ -1,0 +1,121 @@
+package ATMproject;
+
+import java.util.Scanner;
+
+public class LevinATM {
+    private static double balance = 1000; // Global Variable 
+
+    public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+
+        while (true) {  //while true the never stop to repeat my displayTransaction.
+        	//Calling  Method using If Else
+        	displayTransaction();
+            int choice = scanner.nextInt();
+            
+            if(choice==1) {
+                    withdrawCash(scanner);
+                    boolean choice1 = true;
+                    if( choice1 == true  ) {
+                    	System.out.println("Do You want to continue? pls enter y or x to exit..");	
+                    	char process = scanner.next().charAt(0);
+                    	if(process == 'y') {                    
+                    	} else if(process == 'x') {
+                    		System.out.println("╔══════════════════════════════════╗");
+                            System.out.println("║Thank you for using the Levin'ATM.║");
+                            System.out.println("╚══════════════════════════════════╝");   
+                            break;
+                    		}
+                    }
+          } else if(choice == 2) {         // In this conditional statement     
+                    depositCash(scanner);  // You can also use Switch Statement...
+                    boolean choice1 = true;
+                    if( choice1 == true  ) {
+                    	System.out.println("Do You want to continue? pls enter y or x to exit..");	
+                    	char process = scanner.next().charAt(0);
+                    	if(process == 'y') {                    
+                    	} else if(process == 'x') {
+                    		System.out.println("╔══════════════════════════════════╗");
+                            System.out.println("║Thank you for using the Levin'ATM.║");
+                            System.out.println("╚══════════════════════════════════╝");   
+                            break;
+                    		}
+                    }
+          } else if(choice == 3) {
+                    moneyBalance();            
+                	
+          } else if(choice == 4) {
+        	  thankyou();
+               break; // use the break keyword to avoid "Fall Through" this break will stop the looping or Exit the while loop program... 
+          }else{  
+        	  invalid(); // Do not use break to continue the looping even if invalid input by the user....
+               }
+            }
+    } 
+    // Methods
+    private static void displayTransaction() {
+
+        System.out.println("╔══════════════════════════════╗");
+        System.out.println("║    Welcome to My ATM         ║");
+        System.out.println("║    Select an option:         ║");
+        System.out.println("║   1. Withdraw                ║");
+        System.out.println("║   2. Deposit                 ║");
+        System.out.println("║   3. Check Balance           ║");
+        System.out.println("║   4. Exit                    ║");
+        System.out.println("╚══════════════════════════════╝");
+        System.out.print("║ Enter your choice:  ");
+    }
+    private static void withdrawCash(Scanner withdraw) { //declaring Parameter Scanner method
+    	//Scanner scan = new Scanner (System.in); You can also add here a Scanner
+    	System.out.println();
+        System.out.print(" Enter amount to withdraw: ");
+        double amount = withdraw.nextDouble();
+        if (amount <= balance && amount > 0) {
+            balance -= amount;
+            System.out.println("╔══════════════════════════════╗");
+            System.out.println("║    Successfully Withdraw     ║");
+            System.out.println("║ ║Remaining balance: " + balance + "║");
+            System.out.println("╚══════════════════════════════╝");
+        } else if (amount > balance){
+        	System.out.println("╔══════════════════════════════╗");
+            System.out.println("║       Invalid amount         ║");
+            System.out.println("║     Not enough Balance       ║");
+            System.out.println("║        Try Again!!           ║");
+            System.out.println("╚══════════════════════════════╝");
+        }
+    }
+
+    public static void depositCash(Scanner deposit) { //declaring Parameter Scanner method
+    	//Scanner scan = new Scanner (System.in); You can also add here a Scanner
+    	System.out.println();
+        System.out.print(" Enter amount to deposit: ");
+        double amount = deposit.nextDouble();
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("╔════════════════════════════╗");
+            System.out.println("║ Deposit successful         ║");
+            System.out.println("║ ║Updated balance: " + balance +"║");
+            System.out.println("╚════════════════════════════╝");
+        } else {
+        	System.out.println("╔══════════════════════════════╗");
+            System.out.println("║ Invalid amount.              ║");
+            System.out.println("╚══════════════════════════════╝");
+        }
+    }
+
+    public static void moneyBalance() {
+    	System.out.println("╔══════════════════════════════╗");
+        System.out.println("║ ║Your balance: " + balance +"║");
+        System.out.println("╚══════════════════════════════╝");
+    }
+    public static void thankyou() {
+    	System.out.println("╔══════════════════════════════════╗");
+        System.out.println("║Thank you for using the Levin'ATM.║");
+        System.out.println("╚══════════════════════════════════╝");   	
+    }
+    public static void invalid() {
+    	System.out.println("╔══════════════════════════════════╗");
+        System.out.println("║Invalid choice. Please try again. ║");
+        System.out.println("╚══════════════════════════════════╝");
+    }
+}
